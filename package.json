@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/ArekusuNaito/shiny-pokemon-discord-bot#readme",
   "dependencies": {
-    "discord.js": "^12.5.1"
+    "discord.js": "^12.5.1",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.1"
   },
   "devDependencies": {
     "fuse-box": "^4.0.0"
