@@ -1,5 +1,4 @@
 import {Sequelize,STRING,TEXT,INTEGER} from 'sequelize';
-
 const sequelizeInstance = new Sequelize('database','champion','generation5',
 {
     host: 'localhost',
@@ -8,12 +7,10 @@ const sequelizeInstance = new Sequelize('database','champion','generation5',
     storage: 'users.sqlite'
 });
 
-let file = require('./secret.json');
-
 import {DidProbabilityHappen} from './virtues/Generation';
 import {Channel, Client as DiscordClient, TextChannel, User} from 'discord.js';
 const bot = new DiscordClient();
-const AGENT = file.AGENT;
+const AGENT = process.env.SHINY_POKEMON;
 
 bot.login(AGENT);
 
@@ -43,7 +40,7 @@ const UserTable = sequelizeInstance.define('users',
 
 async function ExecuteCommand(command:string,messageAuthor:User,channel:TextChannel)
 {
-    let probabilityMap:{[commandName:string]:string}
+    let probabilityMap:{[commandName:string]:string} = {}
     probabilityMap["~encounter"]='1/8192'
     probabilityMap["~neoEncounter"]='1/4096'
     probabilityMap["~charmEncounter"]='3/8192'
@@ -66,6 +63,7 @@ async function ExecuteCommand(command:string,messageAuthor:User,channel:TextChan
 
 bot.once('ready',()=>
 {
+    console.log("~ Shiny Pokemon Bot Online ~ ");
     UserTable.sync();
 });
 
